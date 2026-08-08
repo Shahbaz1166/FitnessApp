@@ -1,0 +1,1021 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Fitness Coach</title>
+
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- ============ SPLASH SCREEN ============ -->
+    <section
+      id="screen-splash"
+      class="app-screen splash-screen d-flex flex-column align-items-center justify-content-center"
+    >
+      <div class="splash-logo">
+        <i class="bi bi-lightning-charge-fill"></i>
+      </div>
+      <h1 class="splash-title">AI Fitness Coach</h1>
+      <p class="splash-tagline">
+        Your daily companion for a healthier lifestyle
+      </p>
+      <div class="splash-bar mt-4"><div class="splash-bar-fill"></div></div>
+    </section>
+
+    <!-- ============ WELCOME SCREEN ============ -->
+    <section id="screen-welcome" class="app-screen d-none">
+      <div
+        class="welcome-hero d-flex flex-column align-items-center justify-content-center text-center"
+      >
+        <span class="eyebrow">01 — WELCOME</span>
+        <h1 class="hero-title">AI Fitness<br />Coach</h1>
+        <p class="hero-sub">
+          Build healthier habits. Track your progress.<br />Stay consistent.
+        </p>
+        <div class="d-flex gap-3 mt-4 flex-wrap justify-content-center">
+          <button class="btn btn-accent btn-lg px-4" id="welcome-login-btn">
+            Login
+          </button>
+          <button
+            class="btn btn-outline-light btn-lg px-4"
+            id="welcome-signup-btn"
+          >
+            Sign Up
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SIGN UP SCREEN ============ -->
+    <section id="screen-signup" class="app-screen d-none auth-screen">
+      <div class="auth-card">
+        <span class="eyebrow">02 — CREATE ACCOUNT</span>
+        <h2 class="auth-title">Sign Up</h2>
+        <form id="signup-form" novalidate>
+          <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="signup-name"
+              placeholder="e.g. Shahbaz Ahmed"
+              required
+            />
+            <div class="invalid-feedback" id="err-signup-name"></div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="signup-email"
+              placeholder="you@example.com"
+              required
+            />
+            <div class="invalid-feedback" id="err-signup-email"></div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <div class="input-group">
+              <input
+                type="password"
+                class="form-control"
+                id="signup-password"
+                placeholder="Minimum 6 characters"
+                required
+              />
+              <button
+                class="btn btn-toggle-pass"
+                type="button"
+                data-target="signup-password"
+              >
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+            <div
+              class="invalid-feedback d-block"
+              id="err-signup-password"
+            ></div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Confirm Password</label>
+            <div class="input-group">
+              <input
+                type="password"
+                class="form-control"
+                id="signup-confirm"
+                placeholder="Re-enter password"
+                required
+              />
+              <button
+                class="btn btn-toggle-pass"
+                type="button"
+                data-target="signup-confirm"
+              >
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+            <div class="invalid-feedback d-block" id="err-signup-confirm"></div>
+          </div>
+
+          <div
+            id="signup-alert"
+            class="alert alert-danger d-none py-2 px-3 small"
+          ></div>
+          <div
+            id="signup-success"
+            class="alert alert-success d-none py-2 px-3 small"
+          ></div>
+
+          <button
+            type="submit"
+            class="btn btn-accent w-100 py-2"
+            id="signup-submit-btn"
+          >
+            Create Account
+          </button>
+        </form>
+        <p class="auth-switch">
+          Already have an account? <a href="#" id="link-to-login">Login</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ LOGIN SCREEN ============ -->
+    <section id="screen-login" class="app-screen d-none auth-screen">
+      <div class="auth-card">
+        <span class="eyebrow">02 — WELCOME BACK</span>
+        <h2 class="auth-title">Login</h2>
+        <form id="login-form" novalidate>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="login-email"
+              placeholder="you@example.com"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <div class="input-group">
+              <input
+                type="password"
+                class="form-control"
+                id="login-password"
+                placeholder="Your password"
+                required
+              />
+              <button
+                class="btn btn-toggle-pass"
+                type="button"
+                data-target="login-password"
+              >
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div
+            id="login-alert"
+            class="alert alert-danger d-none py-2 px-3 small"
+          ></div>
+
+          <button
+            type="submit"
+            class="btn btn-accent w-100 py-2"
+            id="login-submit-btn"
+          >
+            Login
+          </button>
+        </form>
+        <p class="auth-switch">
+          Don't have an account? <a href="#" id="link-to-signup">Sign Up</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ PROFILE SETUP ============ -->
+    <section id="screen-profile-setup" class="app-screen d-none setup-screen">
+      <div class="setup-card">
+        <span class="eyebrow">03 — ABOUT YOU</span>
+        <h2 class="setup-title">Tell us about yourself</h2>
+        <p class="setup-desc">
+          This helps us personalize your BMI, calorie target and plans.
+        </p>
+        <form id="profile-form" novalidate>
+          <div class="row g-3">
+            <div class="col-6">
+              <label class="form-label">Age</label>
+              <input
+                type="number"
+                min="10"
+                max="100"
+                class="form-control"
+                id="profile-age"
+                placeholder="22"
+                required
+              />
+            </div>
+            <div class="col-6">
+              <label class="form-label">Gender</label>
+              <select class="form-select" id="profile-gender" required>
+                <option value="" selected disabled>Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label class="form-label">Height (cm)</label>
+              <input
+                type="number"
+                min="100"
+                max="250"
+                class="form-control"
+                id="profile-height"
+                placeholder="175"
+                required
+              />
+            </div>
+            <div class="col-6">
+              <label class="form-label">Weight (kg)</label>
+              <input
+                type="number"
+                min="20"
+                max="300"
+                class="form-control"
+                id="profile-weight"
+                placeholder="70"
+                required
+              />
+            </div>
+          </div>
+          <div
+            id="profile-alert"
+            class="alert alert-danger d-none py-2 px-3 small mt-3"
+          ></div>
+          <button type="submit" class="btn btn-accent w-100 py-2 mt-4">
+            Continue
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============ FITNESS GOAL ============ -->
+    <section id="screen-goal" class="app-screen d-none setup-screen">
+      <div class="setup-card setup-card-wide">
+        <span class="eyebrow">04 — YOUR GOAL</span>
+        <h2 class="setup-title">What's your fitness goal?</h2>
+        <p class="setup-desc">
+          Pick one — you can change this anytime from your profile.
+        </p>
+        <div class="goal-grid" id="goal-grid">
+          <div class="goal-card" data-goal="Lose Weight">
+            <i class="bi bi-fire"></i>
+            <span>Lose Weight</span>
+          </div>
+          <div class="goal-card" data-goal="Gain Muscle">
+            <i class="bi bi-lightning-charge"></i>
+            <span>Gain Muscle</span>
+          </div>
+          <div class="goal-card" data-goal="Stay Healthy">
+            <i class="bi bi-heart-pulse"></i>
+            <span>Stay Healthy</span>
+          </div>
+          <div class="goal-card" data-goal="Improve Fitness">
+            <i class="bi bi-graph-up-arrow"></i>
+            <span>Improve Fitness</span>
+          </div>
+        </div>
+        <div
+          id="goal-alert"
+          class="alert alert-danger d-none py-2 px-3 small mt-3"
+        ></div>
+        <button class="btn btn-accent w-100 py-2 mt-4" id="goal-continue-btn">
+          Continue
+        </button>
+      </div>
+    </section>
+
+    <!-- ============ BMI CALCULATOR ============ -->
+    <section id="screen-bmi" class="app-screen d-none setup-screen">
+      <div class="setup-card">
+        <span class="eyebrow">05 — BMI CHECK</span>
+        <h2 class="setup-title">Your BMI</h2>
+        <p class="setup-desc">
+          Calculated from the height and weight you entered.
+        </p>
+
+        <div class="bmi-result-box text-center">
+          <div class="bmi-number" id="bmi-value">--</div>
+          <div class="bmi-category" id="bmi-category">—</div>
+          <p class="bmi-explain" id="bmi-explain"></p>
+        </div>
+
+        <div class="bmi-scale mt-3">
+          <div class="bmi-scale-bar">
+            <span class="seg seg-under"></span
+            ><span class="seg seg-normal"></span
+            ><span class="seg seg-over"></span
+            ><span class="seg seg-obese"></span>
+          </div>
+          <div class="bmi-scale-labels d-flex justify-content-between small">
+            <span>Underweight</span><span>Normal</span><span>Overweight</span
+            ><span>Obese</span>
+          </div>
+        </div>
+
+        <button class="btn btn-accent w-100 py-2 mt-4" id="bmi-continue-btn">
+          Continue
+        </button>
+      </div>
+    </section>
+
+    <!-- ============ CALORIES CALCULATOR ============ -->
+    <section id="screen-calories" class="app-screen d-none setup-screen">
+      <div class="setup-card">
+        <span class="eyebrow">06 — DAILY CALORIES</span>
+        <h2 class="setup-title">Activity level</h2>
+        <p class="setup-desc">Choose how active you are on a typical day.</p>
+
+        <form id="calories-form">
+          <select class="form-select" id="activity-level" required>
+            <option value="" selected disabled>Select activity level</option>
+            <option value="1.2">Sedentary (little or no exercise)</option>
+            <option value="1.375">
+              Lightly Active (light exercise 1–3 days/week)
+            </option>
+            <option value="1.55">
+              Moderately Active (moderate exercise 3–5 days/week)
+            </option>
+            <option value="1.725">
+              Very Active (hard exercise 6–7 days/week)
+            </option>
+          </select>
+
+          <div
+            class="calorie-result-box text-center mt-3 d-none"
+            id="calorie-result-box"
+          >
+            <span class="small text-muted">Your Daily Calorie Target</span>
+            <div class="calorie-number">
+              <span id="calorie-value">--</span>
+              <span class="unit">kcal/day</span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-accent w-100 py-2 mt-4">
+            Calculate &amp; Continue
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============ WORKOUT & DIET PLAN SETUP ============ -->
+    <section id="screen-workout-diet" class="app-screen d-none setup-screen">
+      <div class="setup-card setup-card-wide">
+        <span class="eyebrow">07 — YOUR PLAN</span>
+        <h2 class="setup-title">Workout &amp; diet plan</h2>
+        <p class="setup-desc">
+          Pick a workout level. We'll pair it with a simple daily diet plan.
+        </p>
+
+        <div class="goal-grid goal-grid-3" id="level-grid">
+          <div class="goal-card" data-level="Beginner">
+            <i class="bi bi-emoji-smile"></i><span>Beginner</span>
+          </div>
+          <div class="goal-card" data-level="Intermediate">
+            <i class="bi bi-emoji-sunglasses"></i><span>Intermediate</span>
+          </div>
+          <div class="goal-card" data-level="Advanced">
+            <i class="bi bi-emoji-laughing"></i><span>Advanced</span>
+          </div>
+        </div>
+
+        <div id="workout-preview" class="mt-4 d-none">
+          <h6 class="preview-heading">
+            <i class="bi bi-clipboard-check"></i> Your Workout Plan
+          </h6>
+          <div id="workout-preview-list" class="exercise-list"></div>
+
+          <h6 class="preview-heading mt-4">
+            <i class="bi bi-egg-fried"></i> Your Diet Plan
+          </h6>
+          <div id="diet-preview-list" class="diet-grid"></div>
+        </div>
+
+        <div
+          id="plan-alert"
+          class="alert alert-danger d-none py-2 px-3 small mt-3"
+        ></div>
+        <button class="btn btn-accent w-100 py-2 mt-4" id="plan-continue-btn">
+          Go to Dashboard
+        </button>
+      </div>
+    </section>
+
+    <!-- ============ MAIN APP SHELL ============ -->
+    <section id="screen-app" class="app-screen d-none">
+      <div class="app-shell">
+        <!-- Sidebar (desktop) -->
+        <nav class="app-sidebar d-none d-lg-flex flex-column">
+          <div class="sidebar-brand">
+            <i class="bi bi-lightning-charge-fill"></i> Fitness Coach
+          </div>
+          <div class="sidebar-nav">
+            <a href="#" class="nav-link-app active" data-page="dashboard"
+              ><i class="bi bi-grid-1x2-fill"></i> Dashboard</a
+            >
+            <a href="#" class="nav-link-app" data-page="workout"
+              ><i class="bi bi-clipboard-pulse"></i> Workout</a
+            >
+            <a href="#" class="nav-link-app" data-page="diet"
+              ><i class="bi bi-egg-fried"></i> Diet</a
+            >
+            <a href="#" class="nav-link-app" data-page="habits"
+              ><i class="bi bi-check2-square"></i> Habits</a
+            >
+            <a href="#" class="nav-link-app" data-page="progress"
+              ><i class="bi bi-graph-up"></i> Progress</a
+            >
+            <a href="#" class="nav-link-app" data-page="chatbot"
+              ><i class="bi bi-chat-dots-fill"></i> Chatbot</a
+            >
+            <a href="#" class="nav-link-app" data-page="profile"
+              ><i class="bi bi-person-circle"></i> Profile</a
+            >
+          </div>
+          <button class="btn btn-logout mt-auto" id="sidebar-logout-btn">
+            <i class="bi bi-box-arrow-right"></i> Logout
+          </button>
+        </nav>
+
+        <!-- Mobile top bar -->
+        <div
+          class="mobile-topbar d-flex d-lg-none align-items-center justify-content-between"
+        >
+          <span class="sidebar-brand small-brand"
+            ><i class="bi bi-lightning-charge-fill"></i> Fitness Coach</span
+          >
+          <button
+            class="btn btn-icon"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#mobileNav"
+          >
+            <i class="bi bi-list"></i>
+          </button>
+        </div>
+
+        <!-- Mobile offcanvas nav -->
+        <div class="offcanvas offcanvas-end" id="mobileNav">
+          <div class="offcanvas-header">
+            <span class="sidebar-brand small-brand"
+              ><i class="bi bi-lightning-charge-fill"></i> Fitness Coach</span
+            >
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="offcanvas"
+            ></button>
+          </div>
+          <div class="offcanvas-body d-flex flex-column">
+            <div class="sidebar-nav">
+              <a
+                href="#"
+                class="nav-link-app active"
+                data-page="dashboard"
+                data-bs-dismiss="offcanvas"
+                ><i class="bi bi-grid-1x2-fill"></i> Dashboard</a
+              >
+              <a
+                href="#"
+                class="nav-link-app"
+                data-page="workout"
+                data-bs-dismiss="offcanvas"
+                ><i class="bi bi-clipboard-pulse"></i> Workout</a
+              >
+              <a
+                href="#"
+                class="nav-link-app"
+                data-page="diet"
+                data-bs-dismiss="offcanvas"
+                ><i class="bi bi-egg-fried"></i> Diet</a
+              >
+              <a
+                href="#"
+                class="nav-link-app"
+                data-page="habits"
+                data-bs-dismiss="offcanvas"
+                ><i class="bi bi-check2-square"></i> Habits</a
+              >
+              <a
+                href="#"
+                class="nav-link-app"
+                data-page="progress"
+                data-bs-dismiss="offcanvas"
+                ><i class="bi bi-graph-up"></i> Progress</a
+              >
+              <a
+                href="#"
+                class="nav-link-app"
+                data-page="chatbot"
+                data-bs-dismiss="offcanvas"
+                ><i class="bi bi-chat-dots-fill"></i> Chatbot</a
+              >
+              <a
+                href="#"
+                class="nav-link-app"
+                data-page="profile"
+                data-bs-dismiss="offcanvas"
+                ><i class="bi bi-person-circle"></i> Profile</a
+              >
+            </div>
+            <button class="btn btn-logout mt-auto" id="mobile-logout-btn">
+              <i class="bi bi-box-arrow-right"></i> Logout
+            </button>
+          </div>
+        </div>
+
+        <!-- Main content -->
+        <main class="app-main">
+          <!-- DASHBOARD PAGE -->
+          <div class="app-page" id="page-dashboard">
+            <div class="page-head">
+              <h3 id="dashboard-welcome">Good morning 👋</h3>
+              <p class="text-muted mb-0" id="dashboard-date"></p>
+            </div>
+
+            <div class="row g-3 mt-1">
+              <div class="col-6 col-lg-3">
+                <div class="stat-card">
+                  <div class="stat-ring" id="streak-ring">
+                    <span id="streak-ring-value">0</span>
+                  </div>
+                  <div class="stat-label">Day Streak</div>
+                </div>
+              </div>
+              <div class="col-6 col-lg-3">
+                <div class="stat-card">
+                  <i class="bi bi-droplet-half stat-icon"></i>
+                  <div class="stat-value">
+                    <span id="dash-water">0</span> /
+                    <span id="dash-water-goal">8</span>
+                  </div>
+                  <div class="stat-label">Glasses of water</div>
+                </div>
+              </div>
+              <div class="col-6 col-lg-3">
+                <div class="stat-card">
+                  <i class="bi bi-egg-fried stat-icon"></i>
+                  <div class="stat-value">
+                    <span id="dash-meals">0</span> / 4
+                  </div>
+                  <div class="stat-label">Meals completed</div>
+                </div>
+              </div>
+              <div class="col-6 col-lg-3">
+                <div class="stat-card">
+                  <i class="bi bi-clipboard-check stat-icon"></i>
+                  <div class="stat-value" id="dash-workout-status">Pending</div>
+                  <div class="stat-label">Today's workout</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3 mt-1">
+              <div class="col-md-4">
+                <div class="info-card">
+                  <span class="info-label">BMI</span>
+                  <span class="info-value" id="dash-bmi">--</span>
+                  <span class="info-sub" id="dash-bmi-cat">—</span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="info-card">
+                  <span class="info-label">Daily Calories</span>
+                  <span class="info-value" id="dash-calories">--</span>
+                  <span class="info-sub">kcal / day</span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="info-card">
+                  <span class="info-label">Current Goal</span>
+                  <span class="info-value info-value-sm" id="dash-goal"
+                    >--</span
+                  >
+                  <span class="info-sub">tap Profile to change</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="section-card mt-3">
+              <h6 class="preview-heading">
+                <i class="bi bi-list-check"></i> Today's Habits
+              </h6>
+              <div id="dashboard-habits-mini" class="habit-mini-list"></div>
+            </div>
+          </div>
+
+          <!-- WORKOUT PAGE -->
+          <div class="app-page d-none" id="page-workout">
+            <div class="page-head">
+              <h3>Today's Workout</h3>
+              <p class="text-muted mb-0">
+                Level: <span id="workout-level-label">--</span>
+              </p>
+            </div>
+            <div id="workout-list" class="exercise-list mt-3"></div>
+            <div id="workout-empty" class="empty-state d-none">
+              No workout plan yet.
+            </div>
+            <button class="btn btn-accent mt-3" id="complete-workout-btn">
+              <i class="bi bi-check-circle"></i> Mark Workout as Completed
+            </button>
+            <p class="small text-muted mt-2" id="workout-completed-note"></p>
+          </div>
+
+          <!-- DIET PAGE -->
+          <div class="app-page d-none" id="page-diet">
+            <div class="page-head">
+              <h3>Diet Plan</h3>
+              <p class="text-muted mb-0">
+                Simple educational meal suggestions — not medical advice.
+              </p>
+            </div>
+            <div id="diet-list" class="diet-grid mt-3"></div>
+
+            <div class="section-card mt-3">
+              <h6 class="preview-heading">
+                <i class="bi bi-check2-square"></i> Mark Meals Completed
+              </h6>
+              <div id="meal-tracker-list" class="meal-tracker-list"></div>
+            </div>
+          </div>
+
+          <!-- HABITS PAGE -->
+          <div class="app-page d-none" id="page-habits">
+            <div class="page-head">
+              <h3>Daily Habits</h3>
+              <p class="text-muted mb-0">
+                Small consistent actions, every day.
+              </p>
+            </div>
+            <div id="habits-list" class="habit-list mt-3"></div>
+
+            <div class="section-card mt-4">
+              <h6 class="preview-heading">
+                <i class="bi bi-droplet-half"></i> Water Tracker
+              </h6>
+              <div class="water-tracker">
+                <button class="btn btn-water" id="water-minus">
+                  <i class="bi bi-dash-lg"></i>
+                </button>
+                <div class="water-display">
+                  <span id="water-count">0</span> /
+                  <span id="water-goal-display">8</span> glasses
+                </div>
+                <button class="btn btn-water" id="water-plus">
+                  <i class="bi bi-plus-lg"></i>
+                </button>
+              </div>
+              <div class="progress water-progress mt-3">
+                <div
+                  class="progress-bar"
+                  id="water-progress-bar"
+                  role="progressbar"
+                  style="width: 0%"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PROGRESS PAGE -->
+          <div class="app-page d-none" id="page-progress">
+            <div class="page-head">
+              <h3>Your Progress</h3>
+              <p class="text-muted mb-0">A quick look at how you're doing.</p>
+            </div>
+
+            <div class="row g-3 mt-1">
+              <div class="col-6 col-lg-3">
+                <div class="info-card">
+                  <span class="info-label">Current Weight</span>
+                  <span class="info-value" id="progress-weight">--</span>
+                  <span class="info-sub">kg</span>
+                </div>
+              </div>
+              <div class="col-6 col-lg-3">
+                <div class="info-card">
+                  <span class="info-label">Workouts Done</span>
+                  <span class="info-value" id="progress-workouts">0</span>
+                  <span class="info-sub">total sessions</span>
+                </div>
+              </div>
+              <div class="col-6 col-lg-3">
+                <div class="info-card">
+                  <span class="info-label">Avg. Water</span>
+                  <span class="info-value" id="progress-avg-water">0</span>
+                  <span class="info-sub">glasses/day</span>
+                </div>
+              </div>
+              <div class="col-6 col-lg-3">
+                <div class="info-card">
+                  <span class="info-label">Current Streak</span>
+                  <span class="info-value" id="progress-streak">0</span>
+                  <span class="info-sub">days</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="section-card mt-3">
+              <h6 class="preview-heading">
+                <i class="bi bi-bar-chart-line"></i> Last 7 Days Activity
+              </h6>
+              <div id="progress-chart" class="progress-chart"></div>
+              <div id="progress-empty" class="empty-state d-none">
+                No progress data available yet.
+              </div>
+            </div>
+
+            <div class="section-card mt-3">
+              <h6 class="preview-heading">
+                <i class="bi bi-egg-fried"></i> Meals Completed (7 days)
+              </h6>
+              <div id="progress-meals-summary" class="text-muted small"></div>
+            </div>
+          </div>
+
+          <!-- CHATBOT PAGE -->
+          <div class="app-page d-none" id="page-chatbot">
+            <div class="page-head">
+              <h3>Coach Chatbot</h3>
+              <p class="text-muted mb-0">
+                Quick tips — not a real AI, just handy predefined advice.
+              </p>
+            </div>
+
+            <div class="chat-window mt-3" id="chat-window">
+              <div class="chat-bubble bot">
+                Hi! Tap a button below for a quick tip 👇
+              </div>
+            </div>
+
+            <div class="chat-buttons mt-3">
+              <button class="btn btn-chat" data-topic="workout">
+                <i class="bi bi-clipboard-pulse"></i> Workout Tips
+              </button>
+              <button class="btn btn-chat" data-topic="diet">
+                <i class="bi bi-egg-fried"></i> Diet Tips
+              </button>
+              <button class="btn btn-chat" data-topic="water">
+                <i class="bi bi-droplet-half"></i> Water
+              </button>
+              <button class="btn btn-chat" data-topic="motivation">
+                <i class="bi bi-stars"></i> Motivation
+              </button>
+            </div>
+          </div>
+
+          <!-- PROFILE PAGE -->
+          <div class="app-page d-none" id="page-profile">
+            <div class="page-head">
+              <h3>Profile</h3>
+            </div>
+
+            <div class="section-card mt-3" id="profile-view">
+              <div class="profile-grid">
+                <div>
+                  <span class="info-label">Name</span>
+                  <div class="profile-field" id="pv-name">--</div>
+                </div>
+                <div>
+                  <span class="info-label">Email</span>
+                  <div class="profile-field" id="pv-email">--</div>
+                </div>
+                <div>
+                  <span class="info-label">Age</span>
+                  <div class="profile-field" id="pv-age">--</div>
+                </div>
+                <div>
+                  <span class="info-label">Gender</span>
+                  <div class="profile-field" id="pv-gender">--</div>
+                </div>
+                <div>
+                  <span class="info-label">Height</span>
+                  <div class="profile-field" id="pv-height">--</div>
+                </div>
+                <div>
+                  <span class="info-label">Weight</span>
+                  <div class="profile-field" id="pv-weight">--</div>
+                </div>
+                <div>
+                  <span class="info-label">Current Goal</span>
+                  <div class="profile-field" id="pv-goal">--</div>
+                </div>
+                <div>
+                  <span class="info-label">BMI</span>
+                  <div class="profile-field" id="pv-bmi">--</div>
+                </div>
+                <div>
+                  <span class="info-label">Daily Calories</span>
+                  <div class="profile-field" id="pv-calories">--</div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-wrap gap-2 mt-4">
+                <button class="btn btn-accent" id="edit-profile-btn">
+                  <i class="bi bi-pencil-square"></i> Edit Profile
+                </button>
+                <button class="btn btn-outline-accent" id="change-goal-btn">
+                  <i class="bi bi-flag"></i> Change Goal
+                </button>
+                <button class="btn btn-outline-danger" id="reset-data-btn">
+                  <i class="bi bi-arrow-counterclockwise"></i> Reset Data
+                </button>
+                <button
+                  class="btn btn-outline-secondary"
+                  id="profile-logout-btn"
+                >
+                  <i class="bi bi-box-arrow-right"></i> Logout
+                </button>
+              </div>
+            </div>
+
+            <!-- Edit profile form (hidden by default) -->
+            <div class="section-card mt-3 d-none" id="profile-edit-box">
+              <h6 class="preview-heading">
+                <i class="bi bi-pencil-square"></i> Edit Profile
+              </h6>
+              <form id="edit-profile-form">
+                <div class="row g-3">
+                  <div class="col-6">
+                    <label class="form-label">Age</label>
+                    <input
+                      type="number"
+                      min="10"
+                      max="100"
+                      class="form-control"
+                      id="edit-age"
+                      required
+                    />
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label">Gender</label>
+                    <select class="form-select" id="edit-gender" required>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label">Height (cm)</label>
+                    <input
+                      type="number"
+                      min="100"
+                      max="250"
+                      class="form-control"
+                      id="edit-height"
+                      required
+                    />
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label">Weight (kg)</label>
+                    <input
+                      type="number"
+                      min="20"
+                      max="300"
+                      class="form-control"
+                      id="edit-weight"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="d-flex gap-2 mt-3">
+                  <button type="submit" class="btn btn-accent">
+                    Save Changes
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    id="cancel-edit-profile"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Change goal box (hidden by default) -->
+            <div class="section-card mt-3 d-none" id="profile-goal-box">
+              <h6 class="preview-heading">
+                <i class="bi bi-flag"></i> Change Goal
+              </h6>
+              <div class="goal-grid" id="profile-goal-grid">
+                <div class="goal-card" data-goal="Lose Weight">
+                  <i class="bi bi-fire"></i><span>Lose Weight</span>
+                </div>
+                <div class="goal-card" data-goal="Gain Muscle">
+                  <i class="bi bi-lightning-charge"></i><span>Gain Muscle</span>
+                </div>
+                <div class="goal-card" data-goal="Stay Healthy">
+                  <i class="bi bi-heart-pulse"></i><span>Stay Healthy</span>
+                </div>
+                <div class="goal-card" data-goal="Improve Fitness">
+                  <i class="bi bi-graph-up-arrow"></i
+                  ><span>Improve Fitness</span>
+                </div>
+              </div>
+              <div class="d-flex gap-2 mt-3">
+                <button
+                  class="btn btn-outline-secondary"
+                  id="cancel-change-goal"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <!-- Reset data confirmation modal -->
+    <div class="modal fade" id="resetModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <i class="bi bi-exclamation-triangle text-danger"></i> Reset
+              fitness data?
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            This clears your goal, BMI, calories, plans, tracking and progress.
+            Your Firebase account and login stay intact. This cannot be undone.
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button type="button" class="btn btn-danger" id="confirm-reset-btn">
+              Yes, Reset Data
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast for quick feedback -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div
+        id="appToast"
+        class="toast align-items-center text-bg-dark border-0"
+        role="alert"
+      >
+        <div class="d-flex">
+          <div class="toast-body" id="appToastBody">Saved.</div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            data-bs-dismiss="toast"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- App logic -->
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>
